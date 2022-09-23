@@ -1,5 +1,6 @@
 from functools import reduce
 from math import sqrt
+import sys
 def read_data(filename):
     data = []
     with open(filename) as f:
@@ -24,6 +25,7 @@ if __name__ == '__main__':
     data = read_data('data/class_score_en.csv')
     if data and len(data[0]) == 2: # Check 'data' is valid
         data = add_weighted_average(data, [40/125, 60/100])
+        sys.stdout = open('stdout.md','w')
         if len(data[0]) == 3:      # Check 'data' is valid
             print('### Individual Score')
             print()
@@ -44,3 +46,4 @@ if __name__ == '__main__':
                 print(f'  * Variance: {var:.3f}')
                 print(f'  * Median: **{median:.3f}**')
                 print(f'  * Min/Max: ({min_:.3f}, {max_:.3f})')
+        sys.stdout.close()
